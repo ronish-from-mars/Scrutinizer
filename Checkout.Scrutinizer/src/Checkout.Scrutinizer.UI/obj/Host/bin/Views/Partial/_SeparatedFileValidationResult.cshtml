@@ -1,0 +1,188 @@
+﻿@model Checkout.Scrutinizer.Core.ResultDefinition
+
+<div style="margin-top:-30px;">
+
+    @if (Model != null && Model.Results != null)
+    {
+        var sortedResults = Model.Results.GroupBy(x => x.RowIdentifier);
+
+        var hasErrors = sortedResults.Any(x => x.Any(y => y.HasErrors));
+
+        if (!hasErrors)
+        {
+            <div class="alert alert-success" role="alert">
+                File is valid!
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">
+                File is invalid!
+            </div>
+        }
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item display-on-export" style="display:none">File path -- @Model.FilePath</li>
+                <li class="list-group-item display-on-export" style="display:none">Schema path -- @Model.SchemaPath</li>
+                <li class="list-group-item">Total lines processed -- @Model.TotalLinesProcessed</li>
+                <li class="list-group-item">File type based on schema -- @Model.FileFormat</li>
+                <li class="list-group-item list-group-item-warning">Only top 50 errors are shown.</li>
+                <li class="list-group-item remove-on-export">
+                    <button type="button" id="download-file" class="btn btn-sm btn-outline-secondary">
+                        <span><i class="fa fa-download" id="download"></i></span>
+                        Export results to html
+                    </button>
+                </li>
+
+            </ul><br />
+
+        @*else
+            {
+                <div class="form-group">
+                    <div class="checkbox checbox-switch switch-danger">
+                        <label>
+                            <input type="checkbox" name="show-errors" id="show-errors-only" />
+                            <span></span>
+                            Show errors only
+                        </label>
+                    </div>
+                </div>
+                <br />
+            }*@
+
+        @foreach (var result in sortedResults)
+        {
+            var errorsClass = result != null && result.Any(x => x.HasErrors) ? "has-errors" : "no-error";
+            <div class="@errorsClass">
+                <span class='badge badge-light'>@result.Key</span>
+
+                <p class='text-left text-nowrap' style='overflow-y:hidden;'>@Html.Raw(result.LastOrDefault().Record)</p>
+
+                @if (!string.IsNullOrEmpty(result.FirstOrDefault().ColumnName))
+                {
+                    var key = result.Key.Replace(" ", "").ToLower();
+
+                    <button type='button' class='btn btn-sm btn-outline-secondary' data-toggle='collapse' data-target='@string.Concat("#table", key)'>View parsed data</button>
+                    <br /><br />
+                    <div class="collapse" id="@string.Concat("table", key)">
+                        <table class='table table-sm'>
+                            <thead>
+                                <tr>
+                                    <th scope='col'>Column Name</th>
+                                    <th scope='col'>Column Type</th>
+                                    <th scope='col'>Raw Value</th>
+                                    <th scope='col'>Parsed Value</th>
+                                    <th scope='col'>Actual Columns</th>
+                                    <th scope='col'>Max Columns</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var count = 0;
+                                    foreach (var column in result)
+                                    {
+                                        #region Replacing empty strings
+                                        if (column.ParsedValue.ToString() == string.Empty)
+                                        {
+                                            column.ParsedValue = "[blank]";
+                                        }
+                                        else if (string.IsNullOrWhiteSpace(column.ParsedValue.ToString()))
+                                        {
+                                            column.ParsedValue = column.ParsedValue.ToString().Replace(" ", "[space]");
+                                        }
+                                        else if (column.ParsedValue.ToString().StartsWith(" ") || column.ParsedValue.ToString().EndsWith(" "))
+                                        {
+                                            column.ParsedValue = column.ParsedValue.ToString().Replace(" ", "[space]");
+                                        }
+
+                                        if (column.RawValue == string.Empty)
+                                        {
+                                            column.RawValue = "[blank]";
+                                        }
+                                        else if (string.IsNullOrWhiteSpace(column.RawValue))
+                                        {
+                                            column.RawValue = column.RawValue.Replace(" ", "[space]");
+                                        }
+                                        else if (column.RawValue.StartsWith(" ") || column.RawValue.EndsWith(" "))
+                                        {
+                                            column.RawValue = column.RawValue.Replace(" ", "[space]");
+                                        }
+
+                                        if (column.FillCharacter == string.Empty)
+                                        {
+                                            column.FillCharacter = "[blank]";
+                                        }
+                                        else if (string.IsNullOrWhiteSpace(column.FillCharacter))
+                                        {
+                                            column.FillCharacter = column.FillCharacter.Replace(" ", "[space]");
+                                        }
+                                        else if (column.FillCharacter.StartsWith(" ") || column.FillCharacter.EndsWith(" ") && column.FillCharacter != "Not specified")
+                                        {
+                                            column.FillCharacter = column.FillCharacter.Replace(" ", "[space]");
+                                        }
+                                        #endregion
+
+                                        var highlightClass = string.Empty;
+                                        var badge = string.Empty;
+                                        if (column.HasErrors)
+                                        {
+                                            count++;
+                                            highlightClass = "table-danger";
+                                            badge = $"<span class='badge badge-danger'>{count}</span>";
+                                        }
+
+                                        <tr class="@highlightClass">
+                                            <td>@Html.Raw(badge) @column.ColumnName</td>
+                                            <td>@column.ColumnType</td>
+                                            <td>@column.RawValue</td>
+                                            <td>@column.ParsedValue</td>
+                                            <td>@column.ParsedValuesCount</td>
+                                            <td>@column.MaxColumns</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+
+                <ul class='list-group list-group-flush'>
+                    @{
+                        var innerCount = 0;
+
+                        foreach (var item in result)
+                        {
+
+                            if (item == null || item.ErrorMessages == null || !item.ErrorMessages.Any())
+                            {
+                                continue;
+                            }
+
+                            innerCount++;
+                            var badge = $"<span class='badge badge-danger'>{innerCount}</span>";
+
+                            foreach (var error in item.ErrorMessages)
+                            {
+                                <li class='text-left list-group-item list-group-item-danger'>@Html.Raw(badge) @Html.Raw(error)</li>
+                            }
+
+                        }
+                    }
+                </ul>
+                <br /> <br />
+
+            </div>
+        }
+    }
+    else
+    {
+
+        <div class="alert alert-danger" role="alert">
+            File parse error: File doesn't have a matching schema. Parsing will be ignored.
+            The file does not contain a record identifier that match the schema.
+        </div>
+    }
+</div>
+
+
+

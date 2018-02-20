@@ -1,0 +1,127 @@
+﻿<div class="starter-template remove-on-export">
+    <img style="width:35px; height:35px;" src="~/favicon.png" /> <h3><small class="text-muted">Checkout.Scrutinizer</small></h3>
+
+    <form id="parse-form" novalidate>
+        <div class="input-group mb-3">
+            <input type="text" id="selected-file-path" class="form-control" placeholder="File" aria-label="File" aria-describedby="basic-addon2" required>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="select-file-path">Select</button>
+            </div>
+            <div class="invalid-feedback" style="text-align:left">
+                Please choose file path.
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            <input type="text" id="selected-schema-path" class="form-control" placeholder="Schema" aria-label="Schema" aria-describedby="basic-addon2" required>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="select-schema-path">Select</button>
+            </div>
+            <div class="invalid-feedback" style="text-align:left">
+                Please choose schema path.
+            </div>
+        </div>
+
+        <button type="button" id="validate-file-btn" class="btn btn-outline-secondary has-spinner" style="float:left;">
+            <span class="spinner"><i class="fa fa-refresh fa-spin" id="spinner" style="display:none;"></i></span>
+            Validate File
+        </button>
+
+    </form>
+</div>
+<div class="starter-template" style="text-align:left">
+    <div id="sync-reply"></div>
+</div>
+
+<script>
+    (function () {
+        const { ipcRenderer } = require("electron");
+        const fs = require('fs');
+        
+        $("#select-file-path").click(function () {
+            ipcRenderer.send("select-file-path");
+        });
+
+        $("#select-schema-path").click(function () {
+            ipcRenderer.send("select-schema-path");
+        });
+
+        ipcRenderer.on("select-file-path-reply", (sender, path) => {
+            if (path) {
+                document.getElementById("selected-file-path").value = path;
+            }
+        });
+
+        ipcRenderer.on("select-schema-path-reply", (sender, path) => {
+            if (path) {
+                document.getElementById("selected-schema-path").value = path;
+            }
+        });
+
+        $(document).on("click", "#show-errors-only", function () {
+            var isChecked = $(this).is(':checked');
+            if (isChecked) {
+                $('.no-error').hide();
+                $('.has-errors').show();
+            } else {
+                $('.no-error').show();
+                $('.has-errors').show();
+            }
+        });
+
+        $(document).on("click", "#download-file", function () {
+            ipcRenderer.send("create-html-file");
+        });
+
+        $("#validate-file-btn").on("click", function () {
+
+            var isformValid = document.getElementById("parse-form").checkValidity(); 
+            if (isformValid) {
+                console.log("valid");
+                var filePath = document.getElementById("selected-file-path").value;
+                var schemaPath = document.getElementById("selected-schema-path").value;
+                filePath = filePath.replace("/", "//");
+                schemaPath = schemaPath.replace("/", "//");
+                $(this).prop("disabled", true);
+                $(this).html('<span class="spinner"><i class="fa fa-refresh fa-spin" id="spinner"></i></span> Validating...');
+                ipcRenderer.send("validate-file-btn", '{"FilePath":"' + filePath + '","SchemaFilePath":"' + schemaPath + '"}');
+            } else {
+                console.log("not valid");
+                document.getElementById("parse-form").classList.add('was-validated');
+            }
+        });
+
+        ipcRenderer.on("results", (sender, result) => {
+            if (result) {
+                $("#sync-reply").html("");
+                setTimeout(
+                    function () {
+                        $("#validate-file-btn").prop("disabled", false);
+                        $("#validate-file-btn").html('<span class="spinner"><i class="fa fa-refresh fa-spin" id="spinner" style="display:none;"></i></span>Validate File');
+                        $("#sync-reply").html(result);
+                    }, 1000);
+            }
+        });
+
+        ipcRenderer.on("created-html-file-reply", (sender, path) => {
+            if (path) {
+                var clone = $('html').clone();
+                clone.find('.remove-on-export').remove();
+                clone.find('.display-on-export').css("display", "inline-block");
+
+                var content = clone.html();
+
+                fs.writeFile(path, content, (err) => {
+                    if (err) {
+                        alert("An error ocurred exporting the file" + err.message);
+                        console.log(err);
+                        return;
+                    }
+                    alert("The file has been succesfully saved");
+                });
+            }
+        });
+
+    }());
+</script>
+

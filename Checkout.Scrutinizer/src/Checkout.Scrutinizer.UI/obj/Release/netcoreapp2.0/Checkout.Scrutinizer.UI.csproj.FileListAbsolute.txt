@@ -1,0 +1,16 @@
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer.UI\bin\Release\netcoreapp2.0\electron.manifest.json
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer.UI\bin\Release\netcoreapp2.0\Checkout.Scrutinizer.UI.deps.json
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer.UI\bin\Release\netcoreapp2.0\Checkout.Scrutinizer.UI.runtimeconfig.json
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer.UI\bin\Release\netcoreapp2.0\Checkout.Scrutinizer.UI.runtimeconfig.dev.json
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer.UI\bin\Release\netcoreapp2.0\Checkout.Scrutinizer.UI.dll
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer.UI\bin\Release\netcoreapp2.0\Checkout.Scrutinizer.UI.pdb
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer.UI\bin\Release\netcoreapp2.0\Checkout.Scrutinizer.dll
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer.UI\bin\Release\netcoreapp2.0\FlatFiles.Scrutinizer.dll
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer.UI\bin\Release\netcoreapp2.0\Checkout.Scrutinizer.pdb
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer.UI\bin\Release\netcoreapp2.0\FlatFiles.Scrutinizer.pdb
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer.UI\obj\Release\netcoreapp2.0\Checkout.Scrutinizer.UI.csprojResolveAssemblyReference.cache
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer.UI\obj\Release\netcoreapp2.0\Checkout.Scrutinizer.UI.csproj.CoreCompileInputs.cache
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer.UI\obj\Release\netcoreapp2.0\Checkout.Scrutinizer.UI.AssemblyInfoInputs.cache
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer.UI\obj\Release\netcoreapp2.0\Checkout.Scrutinizer.UI.AssemblyInfo.cs
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer.UI\obj\Release\netcoreapp2.0\Checkout.Scrutinizer.UI.dll
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer.UI\obj\Release\netcoreapp2.0\Checkout.Scrutinizer.UI.pdb

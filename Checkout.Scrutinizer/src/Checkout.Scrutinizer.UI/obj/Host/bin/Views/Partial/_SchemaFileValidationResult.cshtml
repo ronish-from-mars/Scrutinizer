@@ -1,0 +1,40 @@
+﻿@model IList<FluentValidation.Results.ValidationFailure>
+
+<div style="margin-top:-30px;">
+
+    @if (Model != null && Model.Any())
+    {
+
+        <div class="alert alert-danger" role="alert">
+            Schema is invalid!
+        </div>
+
+        <div>
+
+            <ul class='list-group list-group-flush'>
+                @{
+                    var innerCount = 0;
+
+                    foreach (var item in Model)
+                    {
+
+                        if (item == null)
+                        {
+                            continue;
+                        }
+
+                        innerCount++;
+                        var badge = $"<span class='badge badge-danger'>{innerCount}</span>";
+
+                        <li class='text-left list-group-item list-group-item-danger'>@Html.Raw(badge) @Html.Raw(item.ErrorMessage)</li>
+                    }
+                }
+            </ul>
+            <br /> <br />
+        </div>
+
+    }
+</div>
+
+
+

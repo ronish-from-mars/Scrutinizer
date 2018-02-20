@@ -1,0 +1,11 @@
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer\bin\Release\netcoreapp2.0\Checkout.Scrutinizer.deps.json
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer\bin\Release\netcoreapp2.0\Checkout.Scrutinizer.dll
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer\bin\Release\netcoreapp2.0\Checkout.Scrutinizer.pdb
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer\bin\Release\netcoreapp2.0\FlatFiles.Scrutinizer.dll
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer\bin\Release\netcoreapp2.0\FlatFiles.Scrutinizer.pdb
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer\obj\Release\netcoreapp2.0\Checkout.Scrutinizer.csprojResolveAssemblyReference.cache
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer\obj\Release\netcoreapp2.0\Checkout.Scrutinizer.csproj.CoreCompileInputs.cache
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer\obj\Release\netcoreapp2.0\Checkout.Scrutinizer.AssemblyInfoInputs.cache
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer\obj\Release\netcoreapp2.0\Checkout.Scrutinizer.AssemblyInfo.cs
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer\obj\Release\netcoreapp2.0\Checkout.Scrutinizer.dll
+C:\Sandbox\Checkout.Scrutinizer\src\Checkout.Scrutinizer\obj\Release\netcoreapp2.0\Checkout.Scrutinizer.pdb

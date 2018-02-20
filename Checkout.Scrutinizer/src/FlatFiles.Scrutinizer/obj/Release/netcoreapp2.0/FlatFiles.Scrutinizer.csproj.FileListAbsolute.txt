@@ -1,0 +1,11 @@
+C:\Sandbox\Checkout.Scrutinizer\src\FlatFiles.Scrutinizer\bin\Release\netcoreapp2.0\FlatFiles.Scrutinizer.deps.json
+C:\Sandbox\Checkout.Scrutinizer\src\FlatFiles.Scrutinizer\bin\Release\netcoreapp2.0\FlatFiles.Scrutinizer.dll
+C:\Sandbox\Checkout.Scrutinizer\src\FlatFiles.Scrutinizer\bin\Release\netcoreapp2.0\FlatFiles.Scrutinizer.pdb
+C:\Sandbox\Checkout.Scrutinizer\src\FlatFiles.Scrutinizer\obj\Release\netcoreapp2.0\FlatFiles.Scrutinizer.csprojResolveAssemblyReference.cache
+C:\Sandbox\Checkout.Scrutinizer\src\FlatFiles.Scrutinizer\obj\Release\netcoreapp2.0\FlatFiles.Scrutinizer.Resources.SharedResources.resources
+C:\Sandbox\Checkout.Scrutinizer\src\FlatFiles.Scrutinizer\obj\Release\netcoreapp2.0\FlatFiles.Scrutinizer.csproj.GenerateResource.Cache
+C:\Sandbox\Checkout.Scrutinizer\src\FlatFiles.Scrutinizer\obj\Release\netcoreapp2.0\FlatFiles.Scrutinizer.csproj.CoreCompileInputs.cache
+C:\Sandbox\Checkout.Scrutinizer\src\FlatFiles.Scrutinizer\obj\Release\netcoreapp2.0\FlatFiles.Scrutinizer.AssemblyInfoInputs.cache
+C:\Sandbox\Checkout.Scrutinizer\src\FlatFiles.Scrutinizer\obj\Release\netcoreapp2.0\FlatFiles.Scrutinizer.AssemblyInfo.cs
+C:\Sandbox\Checkout.Scrutinizer\src\FlatFiles.Scrutinizer\obj\Release\netcoreapp2.0\FlatFiles.Scrutinizer.dll
+C:\Sandbox\Checkout.Scrutinizer\src\FlatFiles.Scrutinizer\obj\Release\netcoreapp2.0\FlatFiles.Scrutinizer.pdb
